@@ -28,7 +28,7 @@ spring:
           destination: rtt_sample_topic
           autoCreateTopic: true
           producer:
-            partitionExpression: headers['eventId']
+            partitionKeyExpression: headers['eventId']
 
       kafka:
         # kafka specific properties
