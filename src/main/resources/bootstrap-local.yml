@@ -1,0 +1,47 @@
+server:
+  port: 8080
+
+eureka.client.registerWithEureka: false
+eureka.client.fetchRegistry: false
+
+spring:
+  cloud:
+    config:
+      enabled: false
+
+    stream:
+      # belows are properties supported by spring cloud stream not specific to any binder
+      bindings:
+        inbound_channel:
+          destination: rtt_sample_topic
+          contentType: application/json
+          autoCreateTopic: true
+          consumer:
+            group: rtt_sample_topic_group
+            maxAttempts: 2
+            concurrency: 2
+            backOffInitialInterval: 1000
+            backOffMaxInterval: 8000
+            backOffMultiplier: 2
+
+        outbound_channel:
+          destination: rtt_sample_topic
+          autoCreateTopic: true
+          producer:
+            partitionExpression: headers['eventId']
+
+      kafka:
+        # kafka specific properties
+        binder:
+          brokers: localhost:29092
+        bindings:
+          outbound_channel:
+            producer:
+              sync: true
+
+          inbound_channel:
+            consumer:
+              autoCommitOffset: true
+              autoCommitOnError: true
+              enableDlq: true
+
