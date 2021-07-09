@@ -41,7 +41,8 @@ spring:
 
           inbound_channel:
             consumer:
+              group: rtt_sample_topic_group
               autoCommitOffset: true
               autoCommitOnError: true
-              enableDlq: true
+              enableDlq: false
 
