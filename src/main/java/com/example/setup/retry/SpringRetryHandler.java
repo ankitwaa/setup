@@ -16,14 +16,15 @@ public class SpringRetryHandler {
 
 
     @Retryable(maxAttempts = 5, value = Exception.class, backoff = @Backoff(delay = 100))
-    public void method() throws Exception{
+    public String method() throws Exception{
       log.info("retrying....");
       throw new Exception("No Such Implementation");
     }
 
     @Recover
-    public void recoveryMethod(){
+    public String recoveryMethod(){
         log.info("Gone to recovery method after retry");
+        return "Gone to recovery method after retry";
     }
 
 }

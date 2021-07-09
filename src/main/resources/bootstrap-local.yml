@@ -4,6 +4,11 @@ server:
 eureka.client.registerWithEureka: false
 eureka.client.fetchRegistry: false
 
+# this property is must for feign fallback to work properly
+feign:
+  hystrix:
+    enabled: true
+
 spring:
   cloud:
     config:
