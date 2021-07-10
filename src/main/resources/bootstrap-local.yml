@@ -4,9 +4,18 @@ server:
 eureka.client.registerWithEureka: false
 eureka.client.fetchRegistry: false
 
+# client side load balancing using ribbon
+demo:
+  ribbon:
+    NIWSServerListClassName: com.netflix.loadbalancer.ConfigurationBasedServerList
+    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.WeightedResponseTimeRule
+
 # this property is must for feign fallback to work properly
 feign:
   hystrix:
+    enabled: true
+
+  ribbon:
     enabled: true
 
 spring:
