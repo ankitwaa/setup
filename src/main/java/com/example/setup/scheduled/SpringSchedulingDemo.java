@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class SpringSchedulingDemo {
 
-    @Scheduled(initialDelay = 1000, fixedDelay = 1000)
+    @Scheduled(initialDelay = 10000, fixedDelay = 10000)
     public void scheduledJob(){
         log.info("Scheduled Job -{}", System.currentTimeMillis());
     }

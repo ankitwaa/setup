@@ -11,7 +11,7 @@ public class SpringIntegrationChannelHandler {
 
     @ServiceActivator(inputChannel = "directChannel")
     public void handle(Message<?> events) {
-        log.info("message received in direct channel");
+        log.info("message received in direct channel:{}", events);
     }
 
     @ServiceActivator(inputChannel = "defaultErrorChannel", outputChannel = "errorChannel")
