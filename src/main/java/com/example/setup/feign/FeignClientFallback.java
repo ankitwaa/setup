@@ -6,7 +6,12 @@ import org.springframework.stereotype.Component;
 class FeignClientFallback implements FeignClient{
 
     @Override
-    public String retryOperation() {
-        return "this is default feign response";
+    public String retryOperation(String name) {
+        return "this is default feign response -"+name;
+    }
+
+    @Override
+    public String retryOperation(Object obj) {
+        return "this is default feign response -"+obj;
     }
 }
