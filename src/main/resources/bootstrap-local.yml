@@ -21,8 +21,8 @@ spring:
           destination: rtt_sample_topic
           contentType: plain/text
           autoCreateTopic: false  #default is false
+          group: rtt_sample_topic_group
           consumer:
-            group: rtt_sample_topic_group
             maxAttempts: 2
             concurrency: 3  # Create Seperate KafkaListernerContainer and available partitions will be distributed amongs consumers
             backOffInitialInterval: 1000
