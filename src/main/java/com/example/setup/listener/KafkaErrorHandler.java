@@ -7,11 +7,10 @@ import org.springframework.stereotype.Component;
 
 @Slf4j
 @Component
-public class KafkaListeners {
+public class KafkaErrorHandler {
 
-    @StreamListener(target = "inbound_channel")
-    public void consume(Message<String> message){
-      log.info("Consumed message from topic:{}", message);
+    @StreamListener("errorChannel")
+    public void consumeError(Message<?> errorMessage){
+        log.error("Error found while message processing:{}", errorMessage);
     }
-
 }

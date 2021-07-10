@@ -19,19 +19,19 @@ spring:
       bindings:
         inbound_channel:
           destination: rtt_sample_topic
-          contentType: application/json
-          autoCreateTopic: true
+          contentType: plain/text
+          autoCreateTopic: false  #default is false
           consumer:
             group: rtt_sample_topic_group
             maxAttempts: 2
-            concurrency: 2
+            concurrency: 3  # Create Seperate KafkaListernerContainer and available partitions will be distributed amongs consumers
             backOffInitialInterval: 1000
             backOffMaxInterval: 8000
             backOffMultiplier: 2
 
         outbound_channel:
           destination: rtt_sample_topic
-          autoCreateTopic: true
+          autoCreateTopic: false  # default is false
           producer:
             partitionKeyExpression: headers['eventId']
 
@@ -50,4 +50,7 @@ spring:
               autoCommitOffset: true
               autoCommitOnError: true
               enableDlq: false
-
+              configuration:
+                key.deserializer: org.apache.kafka.common.serialization.StringDeserializer
+                value.deserializer: org.apache.kafka.common.serialization.StringDeserializer
+                max.poll.records: 50 # No of records fetched in single poll request
